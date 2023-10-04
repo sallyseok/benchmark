@@ -47,7 +47,7 @@ def generate_model_configs_from_yaml(yaml_file: str) -> List[TorchBenchModelConf
         config_obj = yaml.safe_load(yf)
     models = config_obj["model"] if "model" in config_obj else None
     models = validate(parse_str_to_list(models), list_models()) if models else list_models()
-    extra_args = config_obj["extra_args"].split(' ') if config_obj["extra_args"] else []
+    extra_args = config_obj["extra_args"].split(' ') if "extra_args" in config_obj and config_obj["extra_args"] else []
     configs = []
     for model in models:
         config = TorchBenchModelConfig(
